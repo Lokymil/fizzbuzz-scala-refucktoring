@@ -1,0 +1,7 @@
+# Idea
+.bsp/
+.idea/
+
+# SBT
+null/
+project/
