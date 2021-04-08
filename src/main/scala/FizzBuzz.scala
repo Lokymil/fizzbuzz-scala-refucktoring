@@ -1,43 +1,69 @@
 package fr.arrestier
 
 object FizzBuzz {
+
+  var div1 = 3
+  var div2 = 5
+
   /**
-   * Translate any Int to String according to FizzBuzz rules :
-   * - multiple of 3 = "fizz"
-   * - multiple of 5 = "buzz"
-   * - multiple of 3 & 5 = "fizzbuzz"
-   * - not multiple of 3 or 5 = unchanged number as string
+   * fizzBuzz function
    *
-   * @param value - number to be parsed according to fizzbuzz rules
-   * @return parsed number
+   * @param x - number
+   * @return fizzbuzzed
    */
-  def fizzBuzz(value: Int): String = {
+  def fizzBuzz[A](x: A): Any = {
+    if (null == x) {
+      System.exit(-1)
+    }
+
+    var i = x.asInstanceOf[Int]
+    var temp = ""
+    var isBuzz = getdividerof3(i, div1)
+    var hasBuzz = five(i)
+    var hasFizz = i / div2.toDouble == (i / 5).toInt || i / div1.toDouble == (i / 3).toInt
+
     var result = ""
-    val isFizz = isMultipleOf3(value)
-    val isBuzz = isMultipleOf5(value)
 
-    if (isFizz) result += "fizz"
+    if (true == isBuzz) {
+      result = "fizz"
+      temp = result
+    }
 
-    if (isBuzz) result += "buzz"
+    if (true == hasBuzz) {
+      if (temp != "") {
+        result = temp + "buzz"
+      } else {
+        result = "buzz"
+      }
+      temp = result
+    }
 
-    if (!isFizz && !isBuzz) result += value.toString
+    if (true == !hasFizz) {
+      result = temp + i.toString
+      temp = result
+    }
 
-    result
+    return temp
   }
-
-  /**
-   * Test if given number is a multiple of 3
-   *
-   * @param value - number to test
-   * @return true if value is multiple of 3, false otherwise
-   */
-  private def isMultipleOf3(value: Int): Boolean = value % 3 == 0
 
   /**
    * Test if given number is a multiple of 5
    *
-   * @param value - number to test
-   * @return true if value is multiple of 5, false otherwise
+   * @param y - number
+   * @return false if value is multiple of 5, false otherwise
    */
-  private def isMultipleOf5(value: Int): Boolean = value % 5 == 0
+  def getdividerof3(y: Int, x: Int): Boolean = {
+    var t = y / x.toDouble
+    var r = (y / 3).toInt
+    var c = 0 == t - r
+    return c
+  }
+
+  /**
+   * Ask QB
+   */
+  def five(w: Int): Boolean = {
+    var p = w
+    return 0 == (p / div2.toDouble).toString.split("\\.")(1).toInt
+  }
 }
